@@ -1,0 +1,12 @@
+E:\Gui Wallet\SpookyCoin Gui Wallet\SpookyCoin Gui Wallet\bin\Debug\SpookyCoin Gui Wallet.exe.config
+E:\Gui Wallet\SpookyCoin Gui Wallet\SpookyCoin Gui Wallet\bin\Debug\SpookyCoin Gui Wallet.exe
+E:\Gui Wallet\SpookyCoin Gui Wallet\SpookyCoin Gui Wallet\bin\Debug\SpookyCoin Gui Wallet.pdb
+E:\Gui Wallet\SpookyCoin Gui Wallet\SpookyCoin Gui Wallet\obj\Debug\SpookyCoin Gui Wallet.csprojAssemblyReference.cache
+E:\Gui Wallet\SpookyCoin Gui Wallet\SpookyCoin Gui Wallet\obj\Debug\SpookyCoin_Gui_Wallet.Properties.Resources.resources
+E:\Gui Wallet\SpookyCoin Gui Wallet\SpookyCoin Gui Wallet\obj\Debug\SpookyCoin Gui Wallet.csproj.GenerateResource.cache
+E:\Gui Wallet\SpookyCoin Gui Wallet\SpookyCoin Gui Wallet\obj\Debug\SpookyCoin Gui Wallet.csproj.CoreCompileInputs.cache
+E:\Gui Wallet\SpookyCoin Gui Wallet\SpookyCoin Gui Wallet\obj\Debug\SpookyCoin Gui Wallet.exe
+E:\Gui Wallet\SpookyCoin Gui Wallet\SpookyCoin Gui Wallet\obj\Debug\SpookyCoin Gui Wallet.pdb
+E:\Gui Wallet\SpookyCoin Gui Wallet\SpookyCoin Gui Wallet\bin\Debug\Newtonsoft.Json.dll
+E:\Gui Wallet\SpookyCoin Gui Wallet\SpookyCoin Gui Wallet\obj\Debug\SpookyCoin Gui Wallet.csproj.CopyComplete
+E:\Gui Wallet\SpookyCoin Gui Wallet\SpookyCoin Gui Wallet\obj\Debug\SpookyCoin_Gui_Wallet.OpenWallet.resources
