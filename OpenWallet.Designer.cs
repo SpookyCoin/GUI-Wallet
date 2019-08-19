@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.openWalletBtn = new System.Windows.Forms.Button();
             this.walletFile = new System.Windows.Forms.TextBox();
             this.walletFileLbl = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -37,15 +37,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // openWalletBtn
             // 
-            this.button1.Location = new System.Drawing.Point(114, 250);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(84, 31);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Open wallet";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.openWalletBtn.Location = new System.Drawing.Point(114, 250);
+            this.openWalletBtn.Name = "openWalletBtn";
+            this.openWalletBtn.Size = new System.Drawing.Size(84, 31);
+            this.openWalletBtn.TabIndex = 0;
+            this.openWalletBtn.Text = "Open wallet";
+            this.openWalletBtn.UseVisualStyleBackColor = true;
             // 
             // walletFile
             // 
@@ -65,7 +64,8 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::SpookyCoin_Gui_Wallet.Properties.Resources.spookycoin;
+            this.pictureBox1.ErrorImage = null;
+            this.pictureBox1.InitialImage = null;
             this.pictureBox1.Location = new System.Drawing.Point(106, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
@@ -99,7 +99,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.walletFileLbl);
             this.Controls.Add(this.walletFile);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.openWalletBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -113,7 +113,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button openWalletBtn;
         private System.Windows.Forms.TextBox walletFile;
         private System.Windows.Forms.Label walletFileLbl;
         private System.Windows.Forms.PictureBox pictureBox1;
