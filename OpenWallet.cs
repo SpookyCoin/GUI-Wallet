@@ -29,9 +29,17 @@ namespace SpookyCoin_Gui_Wallet
             nodeList.SelectedItem = "127.0.0.1:11421";
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void openWalletBtn_Click(object sender, EventArgs e)
         {
-            
+            WalletOpen walletOpen = new WalletOpen();
+            walletOpen.daemonHost = "spookypool.nl";
+            walletOpen.daemonPort = 11421;
+            walletOpen.filename = "kanker.wallet";
+            walletOpen.password = "kevin11";
+
+            string walletOpenJson = JsonConvert.SerializeObject(walletOpen);
+
+            MessageBox.Show(ApiClient.HTTP(walletOpenJson, "/wallet/open", "POST"));
         }
     }
 }

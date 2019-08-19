@@ -45,6 +45,7 @@
             this.openWalletBtn.TabIndex = 0;
             this.openWalletBtn.Text = "Open wallet";
             this.openWalletBtn.UseVisualStyleBackColor = true;
+            this.openWalletBtn.Click += new System.EventHandler(this.openWalletBtn_Click);
             // 
             // walletFile
             // 
@@ -65,6 +66,7 @@
             // pictureBox1
             // 
             this.pictureBox1.ErrorImage = null;
+            this.pictureBox1.Image = global::SpookyCoin_Gui_Wallet.Properties.Resources.spookycoin;
             this.pictureBox1.InitialImage = null;
             this.pictureBox1.Location = new System.Drawing.Point(106, 12);
             this.pictureBox1.Name = "pictureBox1";

@@ -10,3 +10,15 @@ E:\Gui Wallet\SpookyCoin Gui Wallet\SpookyCoin Gui Wallet\obj\Debug\SpookyCoin G
 E:\Gui Wallet\SpookyCoin Gui Wallet\SpookyCoin Gui Wallet\bin\Debug\Newtonsoft.Json.dll
 E:\Gui Wallet\SpookyCoin Gui Wallet\SpookyCoin Gui Wallet\obj\Debug\SpookyCoin Gui Wallet.csproj.CopyComplete
 E:\Gui Wallet\SpookyCoin Gui Wallet\SpookyCoin Gui Wallet\obj\Debug\SpookyCoin_Gui_Wallet.OpenWallet.resources
+C:\Users\Administrator.PB-Lap-PC\Documents\GitHub\GUI-Wallet\obj\Debug\SpookyCoin Gui Wallet.csprojAssemblyReference.cache
+C:\Users\Administrator.PB-Lap-PC\Documents\GitHub\GUI-Wallet\obj\Debug\SpookyCoin_Gui_Wallet.OpenWallet.resources
+C:\Users\Administrator.PB-Lap-PC\Documents\GitHub\GUI-Wallet\obj\Debug\SpookyCoin_Gui_Wallet.Properties.Resources.resources
+C:\Users\Administrator.PB-Lap-PC\Documents\GitHub\GUI-Wallet\obj\Debug\SpookyCoin Gui Wallet.csproj.GenerateResource.cache
+C:\Users\Administrator.PB-Lap-PC\Documents\GitHub\GUI-Wallet\obj\Debug\SpookyCoin Gui Wallet.csproj.CoreCompileInputs.cache
+C:\Users\Administrator.PB-Lap-PC\Documents\GitHub\GUI-Wallet\obj\Debug\SpookyCoin Gui Wallet.exe
+C:\Users\Administrator.PB-Lap-PC\Documents\GitHub\GUI-Wallet\obj\Debug\SpookyCoin Gui Wallet.pdb
+C:\Users\Administrator.PB-Lap-PC\Documents\GitHub\GUI-Wallet\bin\Debug\SpookyCoin Gui Wallet.exe.config
+C:\Users\Administrator.PB-Lap-PC\Documents\GitHub\GUI-Wallet\bin\Debug\SpookyCoin Gui Wallet.exe
+C:\Users\Administrator.PB-Lap-PC\Documents\GitHub\GUI-Wallet\bin\Debug\SpookyCoin Gui Wallet.pdb
+C:\Users\Administrator.PB-Lap-PC\Documents\GitHub\GUI-Wallet\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Administrator.PB-Lap-PC\Documents\GitHub\GUI-Wallet\obj\Debug\SpookyCoin Gui Wallet.csproj.CopyComplete

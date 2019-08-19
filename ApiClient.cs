@@ -15,19 +15,41 @@ namespace SpookyCoin_Gui_Wallet
             if (method == "/wallet/open" || method == "/addresses")
             {
                 string url = "http://" + Config.HTTP_Address + ":" + Config.HTTP_Port + method;
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-                httpWebRequest.ContentType = "application/json";
-                httpWebRequest.Method = method_send;
-                httpWebRequest.Headers["X-API-KEY"] = "kevin11";
+                try
+                {
+                    var httpWebRequest = (HttpWebRequest)WebRequest.Create(url) as HttpWebRequest;
+                    httpWebRequest.ContentType = "application/json";
+                    httpWebRequest.Method = method_send;
+                    httpWebRequest.Headers["X-API-KEY"] = "kevin11";
 
-                if (method_send == "POST") {
-                    using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                    if (method_send == "POST")
                     {
-                        streamWriter.Write(json);
+                        using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                        {
+                            streamWriter.Write(json);
+                        }
                     }
+                    WebResponse wr = httpWebRequest.GetResponse();
+
+                    using (var streamReader = new StreamReader(wr.GetResponseStream()))
+                    {
+                        var result = streamReader.ReadToEnd();
+                        return result;
+                    }
+
+                }
+                catch (WebException wex)
+                {
+                    var pageContent = new StreamReader(wex.Response.GetResponseStream())
+                                          .ReadToEnd();
+                    return pageContent;
                 }
 
-                try
+
+
+
+
+                /*try
                 {
                     var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
 
@@ -60,8 +82,9 @@ namespace SpookyCoin_Gui_Wallet
                     {
                         return ex.ToString();
                     }
-                }
-            } else
+                }*/
+            }
+            else
             {
                 return "error no correct method giving";
             }
