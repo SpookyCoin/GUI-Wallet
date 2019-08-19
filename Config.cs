@@ -14,7 +14,8 @@ namespace SpookyCoin_Gui_Wallet
         public static string[] Nodes = {"127.0.0.1:11421", // Local
                                         "spookypool.nl:11421", // MunchieHigh420 - Neeritter
                                         "whonnock.spookypool.nl:11421", // MunchieHigh420 - Stramproy
-                                        "142.93.188.178:11421" // pxckets?
+                                        "142.93.188.178:11421", // pxckets?
+                                        "gabberpool.xyz:11421" //Gabcraftia
                                        };
     }
 }

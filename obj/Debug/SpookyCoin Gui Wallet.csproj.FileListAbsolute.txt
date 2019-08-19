@@ -22,3 +22,4 @@ C:\Users\Administrator.PB-Lap-PC\Documents\GitHub\GUI-Wallet\bin\Debug\SpookyCoi
 C:\Users\Administrator.PB-Lap-PC\Documents\GitHub\GUI-Wallet\bin\Debug\SpookyCoin Gui Wallet.pdb
 C:\Users\Administrator.PB-Lap-PC\Documents\GitHub\GUI-Wallet\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Administrator.PB-Lap-PC\Documents\GitHub\GUI-Wallet\obj\Debug\SpookyCoin Gui Wallet.csproj.CopyComplete
+C:\Users\Administrator.PB-Lap-PC\Documents\GitHub\GUI-Wallet\obj\Debug\SpookyCoin_Gui_Wallet.Wallet.resources

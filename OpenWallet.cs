@@ -81,6 +81,7 @@ namespace SpookyCoin_Gui_Wallet
             else if (response == "")
             { // If success
                 MessageBox.Show("Logged in");
+                this.Visible = false;
             }
             else
             { // Other
