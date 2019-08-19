@@ -12,81 +12,66 @@ namespace SpookyCoin_Gui_Wallet
     {
         public static string HTTP(string json, string method, string method_send)
         {
-            if (method == "/wallet/open" || method == "/addresses")
+            if (method == "/wallet/open" || method == "/addresses" || method == "/wallet/create" ||
+                method == "/node" || method == "/keys                                  ")
             {
                 string url = "http://" + Config.HTTP_Address + ":" + Config.HTTP_Port + method;
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(url) as HttpWebRequest;
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = method_send;
+                httpWebRequest.Headers["X-API-KEY"] = "kevin11";
+
+                // Send Json request
+                if (method_send == "POST")
+                {
+                    using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                    {
+                        streamWriter.Write(json);
+                    }
+                }
+
                 try
-                {
-                    var httpWebRequest = (HttpWebRequest)WebRequest.Create(url) as HttpWebRequest;
-                    httpWebRequest.ContentType = "application/json";
-                    httpWebRequest.Method = method_send;
-                    httpWebRequest.Headers["X-API-KEY"] = "kevin11";
-
-                    if (method_send == "POST")
-                    {
-                        using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-                        {
-                            streamWriter.Write(json);
-                        }
-                    }
-                    WebResponse wr = httpWebRequest.GetResponse();
-
-                    using (var streamReader = new StreamReader(wr.GetResponseStream()))
-                    {
-                        var result = streamReader.ReadToEnd();
-                        return result;
-                    }
-
-                }
-                catch (WebException wex)
-                {
-                    var pageContent = new StreamReader(wex.Response.GetResponseStream())
-                                          .ReadToEnd();
-                    return pageContent;
-                }
-
-
-
-
-
-                /*try
                 {
                     var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
 
                     using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                     {
+                        // 200 request - success
                         var result = streamReader.ReadToEnd();
                         return result;
                     }
                 }
                 // Error catching
-                catch (Exception ex)
+                catch (WebException wex)
                 {
-                    if (ex.ToString().Contains("400"))
+                    if (wex.ToString().Contains("400"))
                     {
-                        return "400";
+                        // Ouput error reason
+                        var pageContent = new StreamReader(wex.Response.GetResponseStream())
+                                          .ReadToEnd();
+                        return pageContent;
                     }
-                    else if (ex.ToString().Contains("401"))
+                    else if (wex.ToString().Contains("401"))
                     {
                         return "401";
                     }
-                    else if (ex.ToString().Contains("403"))
+                    else if (wex.ToString().Contains("403"))
                     {
                         return "403";
                     }
-                    else if (ex.ToString().Contains("500"))
+                    else if (wex.ToString().Contains("500"))
                     {
                         return "500";
                     }
                     else
                     {
-                        return ex.ToString();
+                        return wex.ToString();
                     }
-                }*/
+                }
             }
             else
             {
-                return "error no correct method giving";
+                return "0x00";
             }
         }
     }

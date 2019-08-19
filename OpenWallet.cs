@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
 namespace SpookyCoin_Gui_Wallet
@@ -34,12 +36,56 @@ namespace SpookyCoin_Gui_Wallet
             WalletOpen walletOpen = new WalletOpen();
             walletOpen.daemonHost = "spookypool.nl";
             walletOpen.daemonPort = 11421;
-            walletOpen.filename = "kanker.wallet";
-            walletOpen.password = "kevin11";
+            walletOpen.filename = walletFile.Text + ".wallet";
+            walletOpen.password = walletPassword.Text;
 
             string walletOpenJson = JsonConvert.SerializeObject(walletOpen);
+            string response = ApiClient.HTTP(walletOpenJson, "/wallet/open", "POST");
+            
+            if (response.StartsWith("{")) { // If reply is Json
+                JObject JsonParse = JObject.Parse(response);
+                int errorCode = (int)JsonParse["errorCode"];
+                string errorMessage = (string)JsonParse["errorMessage"];
+                MessageBox.Show(errorMessage);
+            } else if (response == "403") { // If wallet already opened
+                MessageBox.Show("There is already a wallet opened.");
+            } else if(response == "") { // If success
+                MessageBox.Show("Logged in");
+            }else { // Other
+                MessageBox.Show(response);
+            }
+        }
 
-            MessageBox.Show(ApiClient.HTTP(walletOpenJson, "/wallet/open", "POST"));
+        private void createWalletBtn_Click(object sender, EventArgs e)
+        {
+            CreateWallet walletOpen = new CreateWallet();
+            walletOpen.daemonHost = "spookypool.nl";
+            walletOpen.daemonPort = 11421;
+            walletOpen.filename = walletFile.Text + ".wallet";
+            walletOpen.password = walletPassword.Text;
+
+            string walletOpenJson = JsonConvert.SerializeObject(walletOpen);
+            string response = ApiClient.HTTP(walletOpenJson, "/wallet/create", "POST");
+
+            if (response.StartsWith("{"))
+            { // If reply is Json
+                JObject JsonParse = JObject.Parse(response);
+                int errorCode = (int)JsonParse["errorCode"];
+                string errorMessage = (string)JsonParse["errorMessage"];
+                MessageBox.Show(errorMessage);
+            }
+            else if (response == "403")
+            { // If wallet already opened
+                MessageBox.Show("There is already a wallet opened.");
+            }
+            else if (response == "")
+            { // If success
+                MessageBox.Show("Logged in");
+            }
+            else
+            { // Other
+                MessageBox.Show(response);
+            }
         }
     }
 }

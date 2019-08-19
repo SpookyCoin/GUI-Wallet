@@ -34,41 +34,44 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.nodeList = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.walletPassword = new System.Windows.Forms.TextBox();
+            this.createWalletBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // openWalletBtn
             // 
-            this.openWalletBtn.Location = new System.Drawing.Point(114, 250);
+            this.openWalletBtn.Location = new System.Drawing.Point(129, 302);
             this.openWalletBtn.Name = "openWalletBtn";
-            this.openWalletBtn.Size = new System.Drawing.Size(84, 31);
-            this.openWalletBtn.TabIndex = 0;
+            this.openWalletBtn.Size = new System.Drawing.Size(96, 31);
+            this.openWalletBtn.TabIndex = 4;
             this.openWalletBtn.Text = "Open wallet";
             this.openWalletBtn.UseVisualStyleBackColor = true;
             this.openWalletBtn.Click += new System.EventHandler(this.openWalletBtn_Click);
             // 
             // walletFile
             // 
-            this.walletFile.Location = new System.Drawing.Point(60, 154);
+            this.walletFile.Location = new System.Drawing.Point(27, 154);
             this.walletFile.Name = "walletFile";
             this.walletFile.Size = new System.Drawing.Size(198, 20);
-            this.walletFile.TabIndex = 2;
+            this.walletFile.TabIndex = 0;
             // 
             // walletFileLbl
             // 
             this.walletFileLbl.AutoSize = true;
-            this.walletFileLbl.Location = new System.Drawing.Point(57, 138);
+            this.walletFileLbl.Location = new System.Drawing.Point(24, 138);
             this.walletFileLbl.Name = "walletFileLbl";
-            this.walletFileLbl.Size = new System.Drawing.Size(85, 13);
+            this.walletFileLbl.Size = new System.Drawing.Size(69, 13);
             this.walletFileLbl.TabIndex = 3;
-            this.walletFileLbl.Text = "Wallet Filename:";
+            this.walletFileLbl.Text = "Wallet name:";
             // 
             // pictureBox1
             // 
             this.pictureBox1.ErrorImage = null;
             this.pictureBox1.Image = global::SpookyCoin_Gui_Wallet.Properties.Resources.spookycoin;
             this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(106, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(73, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 4;
@@ -77,25 +80,54 @@
             // nodeList
             // 
             this.nodeList.FormattingEnabled = true;
-            this.nodeList.Location = new System.Drawing.Point(60, 207);
+            this.nodeList.Location = new System.Drawing.Point(27, 262);
             this.nodeList.Name = "nodeList";
             this.nodeList.Size = new System.Drawing.Size(198, 21);
-            this.nodeList.TabIndex = 5;
+            this.nodeList.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(57, 191);
+            this.label1.Location = new System.Drawing.Point(24, 246);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(36, 13);
             this.label1.TabIndex = 6;
             this.label1.Text = "Node:";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(24, 191);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Password:";
+            // 
+            // walletPassword
+            // 
+            this.walletPassword.Location = new System.Drawing.Point(27, 207);
+            this.walletPassword.Name = "walletPassword";
+            this.walletPassword.Size = new System.Drawing.Size(198, 20);
+            this.walletPassword.TabIndex = 1;
+            // 
+            // createWalletBtn
+            // 
+            this.createWalletBtn.Location = new System.Drawing.Point(27, 302);
+            this.createWalletBtn.Name = "createWalletBtn";
+            this.createWalletBtn.Size = new System.Drawing.Size(96, 31);
+            this.createWalletBtn.TabIndex = 3;
+            this.createWalletBtn.Text = "Create wallet";
+            this.createWalletBtn.UseVisualStyleBackColor = true;
+            this.createWalletBtn.Click += new System.EventHandler(this.createWalletBtn_Click);
+            // 
             // OpenWallet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(319, 305);
+            this.ClientSize = new System.Drawing.Size(255, 358);
+            this.Controls.Add(this.createWalletBtn);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.walletPassword);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nodeList);
             this.Controls.Add(this.pictureBox1);
@@ -121,6 +153,9 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ComboBox nodeList;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox walletPassword;
+        private System.Windows.Forms.Button createWalletBtn;
     }
 }
 
