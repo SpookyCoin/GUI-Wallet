@@ -63,14 +63,14 @@ namespace SpookyCoin_Gui_Wallet
 
         private void createWalletBtn_Click(object sender, EventArgs e)
         {
-            CreateWallet walletOpen = new CreateWallet();
-            walletOpen.daemonHost = "spookypool.nl";
-            walletOpen.daemonPort = 11421;
-            walletOpen.filename = walletFile.Text + ".wallet";
-            walletOpen.password = walletPassword.Text;
+            CreateWallet createWallet = new CreateWallet();
+            createWallet.daemonHost = "spookypool.nl";
+            createWallet.daemonPort = 11421;
+            createWallet.filename = walletFile.Text + ".wallet";
+            createWallet.password = walletPassword.Text;
 
-            string walletOpenJson = JsonConvert.SerializeObject(walletOpen);
-            string response = ApiClient.HTTP(walletOpenJson, "/wallet/create", "POST");
+            string createWalletJson = JsonConvert.SerializeObject(createWallet);
+            string response = ApiClient.HTTP(createWalletJson, "/wallet/create", "POST");
 
             if (response.StartsWith("{"))
             { // If reply is Json
@@ -95,6 +95,14 @@ namespace SpookyCoin_Gui_Wallet
             { // Other
                 MessageBox.Show(response);
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            Wallet wallet = new Wallet();
+            wallet.Show();
         }
     }
 }
