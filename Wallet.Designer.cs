@@ -37,6 +37,7 @@
             this.ClientSize = new System.Drawing.Size(850, 476);
             this.Name = "Wallet";
             this.Text = "Wallet";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Closed);
             this.ResumeLayout(false);
 
         }

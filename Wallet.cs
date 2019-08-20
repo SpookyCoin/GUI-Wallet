@@ -16,5 +16,10 @@ namespace SpookyCoin_Gui_Wallet
         {
             InitializeComponent();
         }
+
+        private void Closed(object sender, FormClosedEventArgs e)
+        {
+            Environment.Exit(1);
+        }
     }
 }

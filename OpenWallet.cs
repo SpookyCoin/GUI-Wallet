@@ -51,7 +51,12 @@ namespace SpookyCoin_Gui_Wallet
                 MessageBox.Show("There is already a wallet opened.");
             } else if(response == "") { // If success
                 MessageBox.Show("Logged in");
-            }else { // Other
+                this.Hide();
+
+                Wallet wallet = new Wallet();
+                wallet.Show();
+            }
+            else { // Other
                 MessageBox.Show(response);
             }
         }
@@ -80,8 +85,11 @@ namespace SpookyCoin_Gui_Wallet
             }
             else if (response == "")
             { // If success
-                MessageBox.Show("Logged in");
-                this.Visible = false;
+                MessageBox.Show("Wallet created");
+                this.Hide();
+
+                Wallet wallet = new Wallet();
+                wallet.Show();
             }
             else
             { // Other
