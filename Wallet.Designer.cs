@@ -37,9 +37,15 @@
             this.blockchainHeightValue = new System.Windows.Forms.Label();
             this.blockchainHeightLbl = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.unlockedLbl = new System.Windows.Forms.Label();
+            this.unlockedValue = new System.Windows.Forms.Label();
+            this.lockedLbl = new System.Windows.Forms.Label();
+            this.lockedValue = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -65,6 +71,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -80,9 +87,9 @@
             this.groupBox1.Controls.Add(this.hashrateValue);
             this.groupBox1.Controls.Add(this.blockchainHeightValue);
             this.groupBox1.Controls.Add(this.blockchainHeightLbl);
-            this.groupBox1.Location = new System.Drawing.Point(7, 6);
+            this.groupBox1.Location = new System.Drawing.Point(488, 293);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 128);
+            this.groupBox1.Size = new System.Drawing.Size(124, 88);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Information";
@@ -133,6 +140,57 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.lockedValue);
+            this.groupBox2.Controls.Add(this.lockedLbl);
+            this.groupBox2.Controls.Add(this.unlockedValue);
+            this.groupBox2.Controls.Add(this.unlockedLbl);
+            this.groupBox2.Location = new System.Drawing.Point(7, 6);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(147, 103);
+            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Balance";
+            // 
+            // unlockedLbl
+            // 
+            this.unlockedLbl.AutoSize = true;
+            this.unlockedLbl.Location = new System.Drawing.Point(6, 16);
+            this.unlockedLbl.Name = "unlockedLbl";
+            this.unlockedLbl.Size = new System.Drawing.Size(56, 13);
+            this.unlockedLbl.TabIndex = 0;
+            this.unlockedLbl.Text = "Unlocked:";
+            // 
+            // unlockedValue
+            // 
+            this.unlockedValue.AutoSize = true;
+            this.unlockedValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.unlockedValue.Location = new System.Drawing.Point(6, 29);
+            this.unlockedValue.Name = "unlockedValue";
+            this.unlockedValue.Size = new System.Drawing.Size(15, 16);
+            this.unlockedValue.TabIndex = 1;
+            this.unlockedValue.Text = "0";
+            // 
+            // lockedLbl
+            // 
+            this.lockedLbl.AutoSize = true;
+            this.lockedLbl.Location = new System.Drawing.Point(6, 54);
+            this.lockedLbl.Name = "lockedLbl";
+            this.lockedLbl.Size = new System.Drawing.Size(46, 13);
+            this.lockedLbl.TabIndex = 2;
+            this.lockedLbl.Text = "Locked:";
+            // 
+            // lockedValue
+            // 
+            this.lockedValue.AutoSize = true;
+            this.lockedValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lockedValue.Location = new System.Drawing.Point(6, 67);
+            this.lockedValue.Name = "lockedValue";
+            this.lockedValue.Size = new System.Drawing.Size(15, 16);
+            this.lockedValue.TabIndex = 3;
+            this.lockedValue.Text = "0";
+            // 
             // Wallet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -147,6 +205,8 @@
             this.tabPage1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,5 +223,10 @@
         private System.Windows.Forms.Label hashrateLbl;
         private System.Windows.Forms.Label hashrateValue;
         private System.Windows.Forms.Label blockchainHeightValue;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label lockedValue;
+        private System.Windows.Forms.Label lockedLbl;
+        private System.Windows.Forms.Label unlockedValue;
+        private System.Windows.Forms.Label unlockedLbl;
     }
 }
