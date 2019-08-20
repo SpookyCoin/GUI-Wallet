@@ -18,6 +18,17 @@ namespace SpookyCoin_Gui_Wallet
             InitializeComponent();
 
             GetInformation();
+
+            // Get Primary Address
+            string primaryAddress = ApiClient.HTTP("", "/addresses/primary", "GET");
+            if (primaryAddress.StartsWith("{"))
+            {
+                JObject JsonParse = JObject.Parse(primaryAddress);
+                string address = (string)JsonParse["address"];
+
+                primaryAddressValue.Text = "Address: " + address;
+                Config.PrimaryAddress = address;
+            }
         }
 
         private async Task GetInformation()
@@ -47,7 +58,7 @@ namespace SpookyCoin_Gui_Wallet
                     unlockedValue.Text = String.Format("{0:n0}", unlocked);
                     lockedValue.Text = String.Format("{0:n0}", locked);
                 }
-
+                
                 await Task.Delay(3000);
             }
         }
@@ -55,6 +66,11 @@ namespace SpookyCoin_Gui_Wallet
         private void Closed(object sender, FormClosedEventArgs e)
         {
             Environment.Exit(1);
+        }
+
+        private void CopyAddress(object sender, MouseEventArgs e)
+        {
+            Clipboard.SetText(Config.PrimaryAddress);
         }
     }
 }

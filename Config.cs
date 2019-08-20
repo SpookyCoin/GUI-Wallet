@@ -17,5 +17,6 @@ namespace SpookyCoin_Gui_Wallet
                                         "142.93.188.178:11421", // pxckets?
                                         "gabberpool.xyz:11421" //Gabcraftia
                                        };
+        public static string PrimaryAddress = null;
     }
 }

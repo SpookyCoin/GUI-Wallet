@@ -42,6 +42,7 @@
             this.unlockedValue = new System.Windows.Forms.Label();
             this.lockedLbl = new System.Windows.Forms.Label();
             this.lockedValue = new System.Windows.Forms.Label();
+            this.primaryAddressValue = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -50,9 +51,9 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 413);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 205);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(627, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(744, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -66,28 +67,30 @@
             this.tabControl1.Location = new System.Drawing.Point(1, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(626, 412);
+            this.tabControl1.Size = new System.Drawing.Size(743, 204);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.primaryAddressValue);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(618, 386);
+            this.tabPage1.Size = new System.Drawing.Size(735, 178);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.hashrateLbl);
             this.groupBox1.Controls.Add(this.hashrateValue);
             this.groupBox1.Controls.Add(this.blockchainHeightValue);
             this.groupBox1.Controls.Add(this.blockchainHeightLbl);
-            this.groupBox1.Location = new System.Drawing.Point(488, 293);
+            this.groupBox1.Location = new System.Drawing.Point(605, 85);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(124, 88);
             this.groupBox1.TabIndex = 1;
@@ -191,11 +194,21 @@
             this.lockedValue.TabIndex = 3;
             this.lockedValue.Text = "0";
             // 
+            // primaryAddressValue
+            // 
+            this.primaryAddressValue.AutoSize = true;
+            this.primaryAddressValue.Location = new System.Drawing.Point(161, 15);
+            this.primaryAddressValue.Name = "primaryAddressValue";
+            this.primaryAddressValue.Size = new System.Drawing.Size(54, 13);
+            this.primaryAddressValue.TabIndex = 3;
+            this.primaryAddressValue.Text = "Address: -";
+            this.primaryAddressValue.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CopyAddress);
+            // 
             // Wallet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(627, 435);
+            this.ClientSize = new System.Drawing.Size(744, 227);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.Name = "Wallet";
@@ -203,6 +216,7 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Closed);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -228,5 +242,6 @@
         private System.Windows.Forms.Label lockedLbl;
         private System.Windows.Forms.Label unlockedValue;
         private System.Windows.Forms.Label unlockedLbl;
+        private System.Windows.Forms.Label primaryAddressValue;
     }
 }

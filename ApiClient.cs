@@ -13,7 +13,8 @@ namespace SpookyCoin_Gui_Wallet
         public static string HTTP(string json, string method, string method_send)
         {
             if (method == "/wallet/open" || method == "/addresses" || method == "/wallet/create" ||
-                method == "/node" || method == "/keys" || method == "/status" || method == "/balance")
+                method == "/node" || method == "/keys" || method == "/status" || method == "/balance" ||
+                method == "/addresses/primary")
             {
                 string url = "http://" + Config.HTTP_Address + ":" + Config.HTTP_Port + method;
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(url) as HttpWebRequest;
