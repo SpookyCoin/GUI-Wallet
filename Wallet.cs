@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,17 @@ namespace Oscillate_Gui_Wallet
         public Wallet()
         {
             InitializeComponent();
+            string response = ApiClient.HTTP("", "/status", "GET");
+
+            if (response.StartsWith("{"))
+            {
+                JObject JsonParse = JObject.Parse(response);
+                int networkBlockCount = (int)JsonParse["networkBlockCount"];
+                int hashrate = (int)JsonParse["hashrate"];
+
+                labeblockchainHeight.Text = String.Format("{0:n0}", networkBlockCount);
+                labeblockchainHashrate.Text = String.Format("{0:n0}", hashrate);
+            }
         }
 
         private void Closed(object sender, FormClosedEventArgs e)

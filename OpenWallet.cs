@@ -34,8 +34,8 @@ namespace Oscillate_Gui_Wallet
         private void openWalletBtn_Click(object sender, EventArgs e)
         {
             WalletOpen walletOpen = new WalletOpen();
-            walletOpen.daemonHost = "spookypool.nl";
-            walletOpen.daemonPort = 11421;
+            walletOpen.daemonHost = "134.209.75.124";
+            walletOpen.daemonPort = 11246;
             walletOpen.filename = walletFile.Text + ".wallet";
             walletOpen.password = walletPassword.Text;
 
@@ -64,8 +64,8 @@ namespace Oscillate_Gui_Wallet
         private void createWalletBtn_Click(object sender, EventArgs e)
         {
             CreateWallet walletOpen = new CreateWallet();
-            walletOpen.daemonHost = "spookypool.nl";
-            walletOpen.daemonPort = 11421;
+            walletOpen.daemonHost = "134.209.75.124";
+            walletOpen.daemonPort = 11246;
             walletOpen.filename = walletFile.Text + ".wallet";
             walletOpen.password = walletPassword.Text;
 
