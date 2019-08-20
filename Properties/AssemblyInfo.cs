@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SpookyCoin Gui Wallet")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Oscillate Gui Wallet")]
+[assembly: AssemblyDescription("Forked from SpookyCoin GUI wallet")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SpookyCoin Gui Wallet")]
+[assembly: AssemblyProduct("Oscillate Gui Wallet")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

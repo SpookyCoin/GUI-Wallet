@@ -1,4 +1,4 @@
-﻿namespace SpookyCoin_Gui_Wallet
+﻿namespace Oscillate_Gui_Wallet
 {
     partial class Wallet
     {
@@ -28,8 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Wallet));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.labelockedBalance = new System.Windows.Forms.Label();
+            this.labeunlockedBalance = new System.Windows.Forms.Label();
+            this.labeaddress = new System.Windows.Forms.Label();
+            this.labenodeIP = new System.Windows.Forms.Label();
+            this.labeblockchainHeight = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -38,11 +44,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.labeblockchainHeight = new System.Windows.Forms.Label();
-            this.labenodeIP = new System.Windows.Forms.Label();
-            this.labeaddress = new System.Windows.Forms.Label();
-            this.labeunlockedBalance = new System.Windows.Forms.Label();
-            this.labelockedBalance = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -79,6 +80,51 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Overview";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // labelockedBalance
+            // 
+            this.labelockedBalance.AutoSize = true;
+            this.labelockedBalance.Location = new System.Drawing.Point(365, 394);
+            this.labelockedBalance.Name = "labelockedBalance";
+            this.labelockedBalance.Size = new System.Drawing.Size(78, 13);
+            this.labelockedBalance.TabIndex = 16;
+            this.labelockedBalance.Text = "lockedBalance";
+            // 
+            // labeunlockedBalance
+            // 
+            this.labeunlockedBalance.AutoSize = true;
+            this.labeunlockedBalance.Location = new System.Drawing.Point(365, 323);
+            this.labeunlockedBalance.Name = "labeunlockedBalance";
+            this.labeunlockedBalance.Size = new System.Drawing.Size(90, 13);
+            this.labeunlockedBalance.TabIndex = 15;
+            this.labeunlockedBalance.Text = "unlockedBalance";
+            // 
+            // labeaddress
+            // 
+            this.labeaddress.AutoSize = true;
+            this.labeaddress.Location = new System.Drawing.Point(386, 228);
+            this.labeaddress.Name = "labeaddress";
+            this.labeaddress.Size = new System.Drawing.Size(44, 13);
+            this.labeaddress.TabIndex = 14;
+            this.labeaddress.Text = "address";
+            // 
+            // labenodeIP
+            // 
+            this.labenodeIP.AutoSize = true;
+            this.labenodeIP.Location = new System.Drawing.Point(704, 52);
+            this.labenodeIP.Name = "labenodeIP";
+            this.labenodeIP.Size = new System.Drawing.Size(41, 13);
+            this.labenodeIP.TabIndex = 13;
+            this.labenodeIP.Text = "nodeIP";
+            // 
+            // labeblockchainHeight
+            // 
+            this.labeblockchainHeight.AutoSize = true;
+            this.labeblockchainHeight.Location = new System.Drawing.Point(45, 52);
+            this.labeblockchainHeight.Name = "labeblockchainHeight";
+            this.labeblockchainHeight.Size = new System.Drawing.Size(90, 13);
+            this.labeblockchainHeight.TabIndex = 12;
+            this.labeblockchainHeight.Text = "blockchainHeight";
             // 
             // label6
             // 
@@ -142,12 +188,14 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackgroundImage = global::SpookyCoin_Gui_Wallet.Properties.Resources.spookycoin;
-            this.pictureBox1.Location = new System.Drawing.Point(353, 3);
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(353, 19);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(102, 102);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.UseWaitCursor = true;
             // 
             // tabPage2
             // 
@@ -158,51 +206,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Send Transaction";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // labeblockchainHeight
-            // 
-            this.labeblockchainHeight.AutoSize = true;
-            this.labeblockchainHeight.Location = new System.Drawing.Point(45, 52);
-            this.labeblockchainHeight.Name = "labeblockchainHeight";
-            this.labeblockchainHeight.Size = new System.Drawing.Size(90, 13);
-            this.labeblockchainHeight.TabIndex = 12;
-            this.labeblockchainHeight.Text = "blockchainHeight";
-            // 
-            // labenodeIP
-            // 
-            this.labenodeIP.AutoSize = true;
-            this.labenodeIP.Location = new System.Drawing.Point(704, 52);
-            this.labenodeIP.Name = "labenodeIP";
-            this.labenodeIP.Size = new System.Drawing.Size(41, 13);
-            this.labenodeIP.TabIndex = 13;
-            this.labenodeIP.Text = "nodeIP";
-            // 
-            // labeaddress
-            // 
-            this.labeaddress.AutoSize = true;
-            this.labeaddress.Location = new System.Drawing.Point(386, 228);
-            this.labeaddress.Name = "labeaddress";
-            this.labeaddress.Size = new System.Drawing.Size(44, 13);
-            this.labeaddress.TabIndex = 14;
-            this.labeaddress.Text = "address";
-            // 
-            // labeunlockedBalance
-            // 
-            this.labeunlockedBalance.AutoSize = true;
-            this.labeunlockedBalance.Location = new System.Drawing.Point(365, 323);
-            this.labeunlockedBalance.Name = "labeunlockedBalance";
-            this.labeunlockedBalance.Size = new System.Drawing.Size(90, 13);
-            this.labeunlockedBalance.TabIndex = 15;
-            this.labeunlockedBalance.Text = "unlockedBalance";
-            // 
-            // labelockedBalance
-            // 
-            this.labelockedBalance.AutoSize = true;
-            this.labelockedBalance.Location = new System.Drawing.Point(365, 394);
-            this.labelockedBalance.Name = "labelockedBalance";
-            this.labelockedBalance.Size = new System.Drawing.Size(78, 13);
-            this.labelockedBalance.TabIndex = 16;
-            this.labelockedBalance.Text = "lockedBalance";
             // 
             // Wallet
             // 

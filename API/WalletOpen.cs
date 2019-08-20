@@ -1,4 +1,4 @@
-﻿namespace SpookyCoin_Gui_Wallet
+﻿namespace Oscillate_Gui_Wallet
 {
     internal class WalletOpen
     {

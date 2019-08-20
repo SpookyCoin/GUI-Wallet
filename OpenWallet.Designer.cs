@@ -1,4 +1,4 @@
-﻿namespace SpookyCoin_Gui_Wallet
+﻿namespace Oscillate_Gui_Wallet
 {
     partial class OpenWallet
     {
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OpenWallet));
             this.openWalletBtn = new System.Windows.Forms.Button();
             this.walletFile = new System.Windows.Forms.TextBox();
             this.walletFileLbl = new System.Windows.Forms.Label();
@@ -69,11 +70,12 @@
             // pictureBox1
             // 
             this.pictureBox1.ErrorImage = null;
-            this.pictureBox1.Image = global::SpookyCoin_Gui_Wallet.Properties.Resources.spookycoin;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(73, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(57, -1);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.Size = new System.Drawing.Size(127, 127);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 

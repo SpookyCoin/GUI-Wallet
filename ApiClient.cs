@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpookyCoin_Gui_Wallet
+namespace Oscillate_Gui_Wallet
 {
     class ApiClient
     {

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SpookyCoin_Gui_Wallet
+namespace Oscillate_Gui_Wallet
 {
     public partial class Wallet : Form
     {
