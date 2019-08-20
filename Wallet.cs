@@ -56,8 +56,8 @@ namespace SpookyCoin_Gui_Wallet
                     int unlocked = (int)JsonParse["unlocked"];
                     int locked = (int)JsonParse["locked"];
 
-                    unlockedValue.Text = String.Format("{0,0:N2}", unlocked / 100.0);
-                    lockedValue.Text = String.Format("{0,0:N2}", locked / 100.0);
+                    unlockedValue.Text = String.Format("{0,0:N2}", unlocked / 100.0) + " SPKY";
+                    lockedValue.Text = String.Format("{0,0:N2}", locked / 100.0) + " SPKY";
                 }
                 
                 await Task.Delay(3000);
