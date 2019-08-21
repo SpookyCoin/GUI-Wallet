@@ -20,7 +20,5 @@ namespace SpookyCoin_Gui_Wallet
 
         // Personal info
         public static string PrimaryAddress = null;
-        public static int unlockedBlanace = 0;
-        public static int lockedBalance = 0;
     }
 }
