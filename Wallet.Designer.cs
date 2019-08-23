@@ -30,8 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Wallet));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.overviewTab = new System.Windows.Forms.TabPage();
             this.primaryAddressValue = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lockedValue = new System.Windows.Forms.Label();
@@ -43,50 +44,67 @@
             this.hashrateValue = new System.Windows.Forms.Label();
             this.blockchainHeightValue = new System.Windows.Forms.Label();
             this.blockchainHeightLbl = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.transactionsTab = new System.Windows.Forms.TabPage();
+            this.transactionsGrid = new System.Windows.Forms.DataGridView();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.overviewTab.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.transactionsTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.transactionsGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 315);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 339);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(744, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(975, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(163, 17);
+            this.toolStripStatusLabel1.Text = "Connected to: 127.0.0.1:11421";
             // 
             // tabControl1
             // 
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.overviewTab);
+            this.tabControl1.Controls.Add(this.transactionsTab);
             this.tabControl1.Location = new System.Drawing.Point(1, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(743, 314);
+            this.tabControl1.Size = new System.Drawing.Size(974, 338);
             this.tabControl1.TabIndex = 1;
             // 
-            // tabPage1
+            // overviewTab
             // 
-            this.tabPage1.Controls.Add(this.primaryAddressValue);
-            this.tabPage1.Controls.Add(this.groupBox2);
-            this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(735, 288);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.overviewTab.Controls.Add(this.pictureBox3);
+            this.overviewTab.Controls.Add(this.pictureBox2);
+            this.overviewTab.Controls.Add(this.pictureBox1);
+            this.overviewTab.Controls.Add(this.primaryAddressValue);
+            this.overviewTab.Controls.Add(this.groupBox2);
+            this.overviewTab.Controls.Add(this.groupBox1);
+            this.overviewTab.Location = new System.Drawing.Point(4, 22);
+            this.overviewTab.Name = "overviewTab";
+            this.overviewTab.Padding = new System.Windows.Forms.Padding(3);
+            this.overviewTab.Size = new System.Drawing.Size(966, 312);
+            this.overviewTab.TabIndex = 0;
+            this.overviewTab.Text = "Overview";
+            this.overviewTab.UseVisualStyleBackColor = true;
             // 
             // primaryAddressValue
             // 
@@ -198,42 +216,89 @@
             this.blockchainHeightLbl.TabIndex = 0;
             this.blockchainHeightLbl.Text = "Blockchain Height:";
             // 
-            // tabPage2
+            // transactionsTab
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(735, 178);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.transactionsTab.Controls.Add(this.transactionsGrid);
+            this.transactionsTab.Location = new System.Drawing.Point(4, 22);
+            this.transactionsTab.Name = "transactionsTab";
+            this.transactionsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.transactionsTab.Size = new System.Drawing.Size(966, 312);
+            this.transactionsTab.TabIndex = 1;
+            this.transactionsTab.Text = "Transactions";
+            this.transactionsTab.UseVisualStyleBackColor = true;
             // 
-            // toolStripStatusLabel1
+            // transactionsGrid
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(163, 17);
-            this.toolStripStatusLabel1.Text = "Connected to: 127.0.0.1:11421";
+            this.transactionsGrid.AllowUserToResizeRows = false;
+            this.transactionsGrid.BackgroundColor = System.Drawing.Color.White;
+            this.transactionsGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.transactionsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.transactionsGrid.Location = new System.Drawing.Point(3, 6);
+            this.transactionsGrid.MultiSelect = false;
+            this.transactionsGrid.Name = "transactionsGrid";
+            this.transactionsGrid.ReadOnly = true;
+            this.transactionsGrid.RowHeadersVisible = false;
+            this.transactionsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.transactionsGrid.Size = new System.Drawing.Size(951, 300);
+            this.transactionsGrid.TabIndex = 0;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pictureBox3.Image = global::SpookyCoin_Gui_Wallet.Properties.Resources.spookycointext;
+            this.pictureBox3.Location = new System.Drawing.Point(119, 237);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(117, 13);
+            this.pictureBox3.TabIndex = 6;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pictureBox2.Image = global::SpookyCoin_Gui_Wallet.Properties.Resources.walletv100text;
+            this.pictureBox2.Location = new System.Drawing.Point(119, 252);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(135, 13);
+            this.pictureBox2.TabIndex = 5;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pictureBox1.Image = global::SpookyCoin_Gui_Wallet.Properties.Resources.spookycoin;
+            this.pictureBox1.InitialImage = null;
+            this.pictureBox1.Location = new System.Drawing.Point(13, 200);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
             // 
             // Wallet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(744, 337);
+            this.ClientSize = new System.Drawing.Size(975, 361);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(500, 400);
             this.Name = "Wallet";
             this.Text = "Wallet";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Closed);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.overviewTab.ResumeLayout(false);
+            this.overviewTab.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.transactionsTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.transactionsGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -243,8 +308,8 @@
 
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage overviewTab;
+        private System.Windows.Forms.TabPage transactionsTab;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label blockchainHeightLbl;
         private System.Windows.Forms.Label hashrateLbl;
@@ -257,5 +322,9 @@
         private System.Windows.Forms.Label unlockedLbl;
         private System.Windows.Forms.Label primaryAddressValue;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.DataGridView transactionsGrid;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox3;
     }
 }

@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="ApiClient.cs" />
     <Compile Include="API\Error.cs" />
+    <Compile Include="API\Transactions.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="API\CreateWallet.cs" />
     <Compile Include="OpenWallet.cs">
@@ -127,6 +128,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\spookycoin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\walletv100text.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spookycointext.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

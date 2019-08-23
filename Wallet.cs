@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,7 +8,9 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
 namespace SpookyCoin_Gui_Wallet
@@ -17,8 +20,6 @@ namespace SpookyCoin_Gui_Wallet
         public Wallet()
         {
             InitializeComponent();
-
-            GetInformation();
 
             // Get Primary Address
             string primaryAddress = ApiClient.HTTP("", "/addresses/primary", "GET");
@@ -30,9 +31,32 @@ namespace SpookyCoin_Gui_Wallet
                 primaryAddressValue.Text = "Address: " + address;
                 Config.PrimaryAddress = address;
             }
+
+            // Add column to transactions
+            transactionsGrid.ColumnCount = 4;
+            transactionsGrid.Columns[0].Name = "Date";
+            transactionsGrid.Columns[1].Name = "Type";
+            transactionsGrid.Columns[2].Name = "Address";
+            transactionsGrid.Columns[3].Name = "Amount";
+            transactionsGrid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            // Get height, balance, transactions
+            GetInformation();
+            
         }
 
-        private async Task GetInformation()
+        public string[] addRow;
+        public void addTransaction(string date, string type, string address, string amount)
+        {
+            addRow = new string[] {date, type, address, amount};
+            transactionsGrid.Rows.Add(addRow);
+        }
+        public void emptyTransactions()
+        {
+            transactionsGrid.Rows.Clear();
+        }
+        
+        public async Task GetInformation()
         {
             while (true)
             {
@@ -59,7 +83,37 @@ namespace SpookyCoin_Gui_Wallet
                     unlockedValue.Text = String.Format("{0,0:N2}", unlocked / 100.0) + " SPKY";
                     lockedValue.Text = String.Format("{0,0:N2}", locked / 100.0) + " SPKY";
                 }
+
+                // Get Transactions
+                string transactionsInformation = ApiClient.HTTP("", "/transactions", "GET");
+                if (transactionsInformation.StartsWith("{"))
+                {
+                    emptyTransactions();
+
+                    string jsonTransactions = "["+transactionsInformation.Replace("\n", "")+"]";
+                    JArray objectTransactions = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(jsonTransactions);
+                    foreach (var resultTransactions in objectTransactions)
+                    {
+                        foreach (JObject transactions in resultTransactions["transactions"])
+                        {
+                            string blockHeight = (string)transactions["blockHeight"];
+                            int fee = (int)transactions["fee"];
+                            string hash = (string)transactions["hash"];
+                            int timestamp = (int)transactions["timestamp"];
+                            int amount = 0;
+
+                            foreach (JObject kanker in transactions["transfers"])
+                            {
+                                amount = (int)kanker["amount"];
+                            }
+
+                            addTransaction(timestamp.ToString(), "Receive", "-", amount.ToString() + " SPKY");
+                        }
+                    }
+                }
                 
+                
+
                 await Task.Delay(3000);
             }
         }
