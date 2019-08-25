@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -20,6 +21,15 @@ namespace SpookyCoin_Gui_Wallet
         public OpenWallet()
         {
             InitializeComponent();
+            
+            // Start API
+            ProcessStartInfo startAPI = new ProcessStartInfo();
+            startAPI.FileName = Path.GetFileName("wallet-api.exe");
+            startAPI.Arguments = "--rpc-password kevin11 --port 8070";
+            startAPI.CreateNoWindow = true;
+            startAPI.UseShellExecute = false;
+            Process.Start(startAPI);
+            
 
             // Init Nodes
             foreach (string Nodes in Config.Nodes)
@@ -36,7 +46,7 @@ namespace SpookyCoin_Gui_Wallet
             WalletOpen walletOpen = new WalletOpen();
             walletOpen.daemonHost = "spookypool.nl";
             walletOpen.daemonPort = 11421;
-            walletOpen.filename = walletFile.Text + ".wallet";
+            walletOpen.filename = walletFile.Text;
             walletOpen.password = walletPassword.Text;
 
             string walletOpenJson = JsonConvert.SerializeObject(walletOpen);
@@ -66,7 +76,7 @@ namespace SpookyCoin_Gui_Wallet
             CreateWallet createWallet = new CreateWallet();
             createWallet.daemonHost = "spookypool.nl";
             createWallet.daemonPort = 11421;
-            createWallet.filename = walletFile.Text + ".wallet";
+            createWallet.filename = walletFile.Text;
             createWallet.password = walletPassword.Text;
 
             string createWalletJson = JsonConvert.SerializeObject(createWallet);
@@ -103,6 +113,31 @@ namespace SpookyCoin_Gui_Wallet
 
             Wallet wallet = new Wallet();
             wallet.Show();
+        }
+
+        private void browseWalletFile_Click(object sender, EventArgs e)
+        {
+            DialogResult result = browseFile.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                string file = browseFile.FileName;
+                try
+                {
+                    walletFile.Text = browseFile.InitialDirectory + browseFile.FileName;
+                }
+                catch (IOException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+        }
+
+        private void exit(object sender, FormClosingEventArgs e)
+        {
+            foreach (var process in Process.GetProcessesByName("wallet-api"))
+            {
+                process.Kill();
+            }
         }
     }
 }

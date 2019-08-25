@@ -17,10 +17,16 @@ namespace SpookyCoin_Gui_Wallet
 {
     public partial class Wallet : Form
     {
+        // Set placeholder strings
+        public string walletAddressStr;
+        public string paymentIdStr;
+        public string amountStr;
+        public string feeStr;
+
         public Wallet()
         {
             InitializeComponent();
-
+            
             // Get Primary Address
             string primaryAddress = ApiClient.HTTP("", "/addresses/primary", "GET");
             if (primaryAddress.StartsWith("{"))
@@ -28,7 +34,7 @@ namespace SpookyCoin_Gui_Wallet
                 JObject JsonParse = JObject.Parse(primaryAddress);
                 string address = (string)JsonParse["address"];
 
-                primaryAddressValue.Text = "Address: " + address;
+                primaryAddressValue.Text = address;
                 Config.PrimaryAddress = address;
             }
 
@@ -42,7 +48,23 @@ namespace SpookyCoin_Gui_Wallet
 
             // Get height, balance, transactions
             GetInformation();
-            
+
+            // Set Mixin to 1
+            mixinLst.SelectedIndex = 1;
+
+            // Set placeholders & colors
+            walletAddressStr = "Enter a wallet address (Example: Sp3zsmMPTeN1EnKbFENrjMNaFfEvBd3iPEJnzqaqmKk2BHaKsNdFozFZzBRPBZvMKH2DQ3rZg5onJMwSfBMYLLv6114LE6i45)";
+            walletAddressTxt.Text = walletAddressStr;
+            walletAddressTxt.ForeColor = Color.Gray;
+            paymentIdStr = "Enter a payment ID";
+            paymentIdTxt.Text = paymentIdStr;
+            paymentIdTxt.ForeColor = Color.Gray;
+            amountStr = "1234.00";
+            amountTxt.Text = amountStr;
+            amountTxt.ForeColor = Color.Gray;
+            feeStr = "Min. 1 SPKY";
+            feeTxt.Text = feeStr;
+            feeTxt.ForeColor = Color.Gray;
         }
 
         public string[] addRow;
@@ -54,6 +76,14 @@ namespace SpookyCoin_Gui_Wallet
         public void emptyTransactions()
         {
             transactionsGrid.Rows.Clear();
+        }
+        public int currentSelectedRow()
+        {
+            return transactionsGrid.CurrentCell.RowIndex;
+        }
+        public void selectCurrentRow(int row)
+        {
+            transactionsGrid.Rows[row].Selected = true;
         }
         
         public async Task GetInformation()
@@ -89,7 +119,7 @@ namespace SpookyCoin_Gui_Wallet
                 if (transactionsInformation.StartsWith("{"))
                 {
                     emptyTransactions();
-
+                    
                     string jsonTransactions = "["+transactionsInformation.Replace("\n", "")+"]";
                     JArray objectTransactions = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(jsonTransactions);
                     foreach (var resultTransactions in objectTransactions)
@@ -100,32 +130,132 @@ namespace SpookyCoin_Gui_Wallet
                             int fee = (int)transactions["fee"];
                             string hash = (string)transactions["hash"];
                             int timestamp = (int)transactions["timestamp"];
-                            int amount = 0;
+                            string amount = null;
 
                             foreach (JObject kanker in transactions["transfers"])
                             {
-                                amount = (int)kanker["amount"];
+                                amount = String.Format("{0,0:N2}", (int)kanker["amount"] / 100.0);
                             }
 
-                            addTransaction(timestamp.ToString(), "Receive", "-", amount.ToString() + " SPKY");
+                            DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+                            dtDateTime = dtDateTime.AddSeconds(timestamp).ToLocalTime();
+                            string timestampToDateTime = dtDateTime.Day + "-" + dtDateTime.Month + "-" + dtDateTime.Year + " " + dtDateTime.Hour + ":" + dtDateTime.Minute;
+
+                            addTransaction(timestampToDateTime, "Receive", "-", amount + " SPKY");
                         }
                     }
+
+                    //selectCurrentRow(currentSelectedRow());
                 }
                 
-                
-
                 await Task.Delay(3000);
             }
         }
 
-        private void Closed(object sender, FormClosedEventArgs e)
+        public static System.Windows.Forms.Timer changeToBlack = new System.Windows.Forms.Timer();
+        
+        private void CopyAddress(object sender, MouseEventArgs e)
         {
+            primaryAddressValue.ForeColor = Color.Green;
+            changeToBlack.Tick += new EventHandler(changeToBlack_Tick);
+            changeToBlack.Interval = 500;
+            changeToBlack.Start();
+            Clipboard.SetText(Config.PrimaryAddress);
+        }
+
+        private void Closed(object sender, FormClosingEventArgs e)
+        {
+            ApiClient.HTTP("", "/save", "PUT"); // Logout of wallet in API
+            //ApiClient.HTTP("", "/wallet", "DELETE"); // Logout of wallet in API
+            /*foreach (var process in Process.GetProcessesByName("wallet-api"))
+            {
+                process.Kill();
+            }*/
             Environment.Exit(1);
         }
 
-        private void CopyAddress(object sender, MouseEventArgs e)
+        private void changeToBlack_Tick(object sender, EventArgs e)
         {
-            Clipboard.SetText(Config.PrimaryAddress);
+            changeToBlack.Stop();
+            primaryAddressValue.ForeColor = Color.Black;
+        }
+
+        private void aboutMenu_Click(object sender, EventArgs e)
+        {
+            About aboutWindow = new About();
+            aboutWindow.Show();
+        }
+
+        private void placeholderWalletAddressEnter(object sender, EventArgs e)
+        {
+            if (walletAddressTxt.Text == walletAddressStr)
+            {
+                walletAddressTxt.Text = "";
+                walletAddressTxt.ForeColor = Color.Black;
+            }
+        }
+
+        private void placeholderWalletAddressLeave(object sender, EventArgs e)
+        {
+            if (walletAddressTxt.Text == "")
+            {
+                walletAddressTxt.Text = walletAddressStr;
+                walletAddressTxt.ForeColor = Color.Gray;
+            }
+        }
+
+        private void paymentIdEnter(object sender, EventArgs e)
+        {
+            if (paymentIdTxt.Text == paymentIdStr)
+            {
+                paymentIdTxt.Text = "";
+                paymentIdTxt.ForeColor = Color.Black;
+            }
+        }
+
+        private void paymentIdLeave(object sender, EventArgs e)
+        {
+            if (paymentIdTxt.Text == "")
+            {
+                paymentIdTxt.Text = paymentIdStr;
+                paymentIdTxt.ForeColor = Color.Gray;
+            }
+        }
+
+        private void amountEnter(object sender, EventArgs e)
+        {
+            if (amountTxt.Text == amountStr)
+            {
+                amountTxt.Text = "";
+                amountTxt.ForeColor = Color.Black;
+            }
+        }
+
+        private void amountLeave(object sender, EventArgs e)
+        {
+            if (amountTxt.Text == "")
+            {
+                amountTxt.Text = amountStr;
+                amountTxt.ForeColor = Color.Gray;
+            }
+        }
+
+        private void feeEnter(object sender, EventArgs e)
+        {
+            if (feeTxt.Text == feeStr)
+            {
+                feeTxt.Text = "";
+                feeTxt.ForeColor = Color.Black;
+            }
+        }
+
+        private void feeLeave(object sender, EventArgs e)
+        {
+            if (feeTxt.Text == "")
+            {
+                feeTxt.Text = feeStr;
+                feeTxt.ForeColor = Color.Gray;
+            }
         }
     }
 }

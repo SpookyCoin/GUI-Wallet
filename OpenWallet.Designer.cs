@@ -39,6 +39,8 @@
             this.walletPassword = new System.Windows.Forms.TextBox();
             this.createWalletBtn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.browseFile = new System.Windows.Forms.OpenFileDialog();
+            this.browseWalletFile = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,7 +58,7 @@
             // 
             this.walletFile.Location = new System.Drawing.Point(27, 154);
             this.walletFile.Name = "walletFile";
-            this.walletFile.Size = new System.Drawing.Size(198, 20);
+            this.walletFile.Size = new System.Drawing.Size(117, 20);
             this.walletFile.TabIndex = 0;
             // 
             // walletFileLbl
@@ -132,11 +134,26 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // browseFile
+            // 
+            this.browseFile.FileName = "openFileDialog1";
+            // 
+            // browseWalletFile
+            // 
+            this.browseWalletFile.Location = new System.Drawing.Point(150, 153);
+            this.browseWalletFile.Name = "browseWalletFile";
+            this.browseWalletFile.Size = new System.Drawing.Size(75, 22);
+            this.browseWalletFile.TabIndex = 10;
+            this.browseWalletFile.Text = "Browse...";
+            this.browseWalletFile.UseVisualStyleBackColor = true;
+            this.browseWalletFile.Click += new System.EventHandler(this.browseWalletFile_Click);
+            // 
             // OpenWallet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(255, 358);
+            this.Controls.Add(this.browseWalletFile);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.createWalletBtn);
             this.Controls.Add(this.label2);
@@ -153,6 +170,7 @@
             this.MinimizeBox = false;
             this.Name = "OpenWallet";
             this.Text = "Open wallet";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.exit);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -171,6 +189,8 @@
         private System.Windows.Forms.TextBox walletPassword;
         private System.Windows.Forms.Button createWalletBtn;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.OpenFileDialog browseFile;
+        private System.Windows.Forms.Button browseWalletFile;
     }
 }
 
