@@ -265,7 +265,7 @@
             this.transactionsTab.Location = new System.Drawing.Point(4, 22);
             this.transactionsTab.Name = "transactionsTab";
             this.transactionsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.transactionsTab.Size = new System.Drawing.Size(693, 317);
+            this.transactionsTab.Size = new System.Drawing.Size(880, 317);
             this.transactionsTab.TabIndex = 1;
             this.transactionsTab.Text = "Transactions";
             // 
@@ -284,7 +284,7 @@
             this.transactionsGrid.ReadOnly = true;
             this.transactionsGrid.RowHeadersVisible = false;
             this.transactionsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.transactionsGrid.Size = new System.Drawing.Size(684, 308);
+            this.transactionsGrid.Size = new System.Drawing.Size(871, 308);
             this.transactionsGrid.TabIndex = 0;
             // 
             // sendTab
@@ -486,7 +486,7 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.fileToolStripMenuItem.Text = "Exit";
             // 
             // settingsToolStripMenuItem
@@ -501,13 +501,13 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // exportPrivateKeysToolStripMenuItem
             // 
             this.exportPrivateKeysToolStripMenuItem.Name = "exportPrivateKeysToolStripMenuItem";
-            this.exportPrivateKeysToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.exportPrivateKeysToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exportPrivateKeysToolStripMenuItem.Text = "Export private keys";
             // 
             // helpToolStripMenuItem
@@ -521,7 +521,7 @@
             // aboutMenu
             // 
             this.aboutMenu.Name = "aboutMenu";
-            this.aboutMenu.Size = new System.Drawing.Size(107, 22);
+            this.aboutMenu.Size = new System.Drawing.Size(180, 22);
             this.aboutMenu.Text = "About";
             this.aboutMenu.Click += new System.EventHandler(this.aboutMenu_Click);
             // 

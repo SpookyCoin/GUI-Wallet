@@ -1,16 +1,7 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
 namespace SpookyCoin_Gui_Wallet
@@ -39,12 +30,17 @@ namespace SpookyCoin_Gui_Wallet
             }
 
             // Add column to transactions
-            transactionsGrid.ColumnCount = 4;
-            transactionsGrid.Columns[0].Name = "Date";
-            transactionsGrid.Columns[1].Name = "Type";
-            transactionsGrid.Columns[2].Name = "Address";
-            transactionsGrid.Columns[3].Name = "Amount";
-            transactionsGrid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            transactionsGrid.ColumnCount = 6;
+            transactionsGrid.Columns[0].Name = "#";
+            transactionsGrid.Columns[1].Name = "Date";
+            transactionsGrid.Columns[2].Name = "Type";
+            transactionsGrid.Columns[3].Name = "Hash";
+            transactionsGrid.Columns[4].Name = "Block Height";
+            transactionsGrid.Columns[5].Name = "Amount";
+
+            transactionsGrid.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            transactionsGrid.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            transactionsGrid.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             // Get height, balance, transactions
             GetInformation();
@@ -68,10 +64,22 @@ namespace SpookyCoin_Gui_Wallet
         }
 
         public string[] addRow;
-        public void addTransaction(string date, string type, string address, string amount)
+        public void addTransaction(string no, string date, string type, string hash, string blockheight, string amount)
         {
-            addRow = new string[] {date, type, address, amount};
-            transactionsGrid.Rows.Add(addRow);
+            addRow = new string[] {no, date, type, hash, blockheight, amount};
+            // Add top of row
+            transactionsGrid.Rows.Insert(0, addRow);
+
+            // Change color for Received or Sent
+            Color RedCustom = Color.FromArgb(255, 214, 214);
+            Color GreenCustom = Color.FromArgb(214, 255, 214);
+            if (type == "Sent")
+            {
+                transactionsGrid.Rows[0].Cells[2].Style.BackColor = RedCustom;
+            } else if(type == "Received")
+            {
+                transactionsGrid.Rows[0].Cells[2].Style.BackColor = GreenCustom;
+            }
         }
         public void emptyTransactions()
         {
@@ -119,33 +127,48 @@ namespace SpookyCoin_Gui_Wallet
                 if (transactionsInformation.StartsWith("{"))
                 {
                     emptyTransactions();
-                    
+
                     string jsonTransactions = "["+transactionsInformation.Replace("\n", "")+"]";
                     JArray objectTransactions = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(jsonTransactions);
                     foreach (var resultTransactions in objectTransactions)
                     {
+                        int No = 0;
                         foreach (JObject transactions in resultTransactions["transactions"])
                         {
+
+                            No += 1;
                             string blockHeight = (string)transactions["blockHeight"];
                             int fee = (int)transactions["fee"];
                             string hash = (string)transactions["hash"];
                             int timestamp = (int)transactions["timestamp"];
                             string amount = null;
+                            int amountint = 0;
 
                             foreach (JObject kanker in transactions["transfers"])
                             {
                                 amount = String.Format("{0,0:N2}", (int)kanker["amount"] / 100.0);
+                                amountint = (int)kanker["amount"];
                             }
 
                             DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
                             dtDateTime = dtDateTime.AddSeconds(timestamp).ToLocalTime();
-                            string timestampToDateTime = dtDateTime.Day + "-" + dtDateTime.Month + "-" + dtDateTime.Year + " " + dtDateTime.Hour + ":" + dtDateTime.Minute;
+                            string timestampToDateTime = String.Format("{0:dd-MM-yyyy HH:mm}", dtDateTime);
+                            
+                            string transactionType = null;
+                            if (amountint > 0)
+                            {
+                                transactionType = "Received";
+                            }
+                            else if (amountint < 0)
+                            {
+                                transactionType = "Sent";
+                            }
 
-                            addTransaction(timestampToDateTime, "Receive", "-", amount + " SPKY");
+                            addTransaction(No.ToString(), timestampToDateTime, transactionType, hash, String.Format("{0:n0}", Convert.ToInt32(blockHeight)).ToString().Replace(".", ","), amount + " SPKY");
                         }
                     }
 
-                    //selectCurrentRow(currentSelectedRow());
+                    selectCurrentRow(currentSelectedRow());
                 }
                 
                 await Task.Delay(3000);
