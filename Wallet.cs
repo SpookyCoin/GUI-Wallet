@@ -1,6 +1,9 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -46,7 +49,7 @@ namespace SpookyCoin_Gui_Wallet
             GetInformation();
 
             // Set Mixin to 1
-            mixinLst.SelectedIndex = 1;
+            mixinLst.SelectedIndex = 0;
 
             // Set placeholders & colors
             walletAddressStr = "Enter a wallet address (Example: Sp3zsmMPTeN1EnKbFENrjMNaFfEvBd3iPEJnzqaqmKk2BHaKsNdFozFZzBRPBZvMKH2DQ3rZg5onJMwSfBMYLLv6114LE6i45)";
@@ -106,8 +109,8 @@ namespace SpookyCoin_Gui_Wallet
                     int networkBlockCount = (int)JsonParse["networkBlockCount"];
                     int hashrate = (int)JsonParse["hashrate"];
 
-                    blockchainHeightValue.Text = String.Format("{0:n0}", networkBlockCount);
-                    hashrateValue.Text = String.Format("{0:n0}", hashrate);
+                    blockchainHeightValue.Text = String.Format("{0:n0}", networkBlockCount).ToString().Replace(".", ",");
+                    hashrateValue.Text = String.Format("{0:n0}", hashrate).Replace(".", ",");
                 }
 
                 // Get Balance Information
@@ -120,6 +123,9 @@ namespace SpookyCoin_Gui_Wallet
 
                     unlockedValue.Text = String.Format("{0,0:N2}", unlocked / 100.0) + " SPKY";
                     lockedValue.Text = String.Format("{0,0:N2}", locked / 100.0) + " SPKY";
+
+                    unlockedValue.Text = (unlocked / 100.0).ToString("N", new CultureInfo("en-US")) + " SPKY";
+                    lockedValue.Text = (locked / 100.0).ToString("N", new CultureInfo("en-US")) + " SPKY";
                 }
 
                 // Get Transactions
@@ -146,7 +152,7 @@ namespace SpookyCoin_Gui_Wallet
 
                             foreach (JObject kanker in transactions["transfers"])
                             {
-                                amount = String.Format("{0,0:N2}", (int)kanker["amount"] / 100.0);
+                                amount = ((int)kanker["amount"] / 100.0).ToString("N", new CultureInfo("en-US"));
                                 amountint = (int)kanker["amount"];
                             }
 
@@ -168,9 +174,8 @@ namespace SpookyCoin_Gui_Wallet
                         }
                     }
 
-                    selectCurrentRow(currentSelectedRow());
+                    //selectCurrentRow(currentSelectedRow());
                 }
-                
                 await Task.Delay(3000);
             }
         }
@@ -279,6 +284,64 @@ namespace SpookyCoin_Gui_Wallet
                 feeTxt.Text = feeStr;
                 feeTxt.ForeColor = Color.Gray;
             }
+        }
+
+        private void sendBtn_Click(object sender, EventArgs e)
+        {
+            string paymentId;
+            int amount;
+            int fee;
+
+            if (paymentIdTxt.Text == paymentIdStr)
+            { paymentId = ""; }
+            else
+            { paymentId = paymentIdTxt.Text; }
+
+            if (amountTxt.Text == amountStr)
+            { amount = 0; }
+            else
+            { amount = (Convert.ToInt32(amountTxt.Text) * 100); }
+
+            if (feeTxt.Text == feeStr)
+            { fee = 100; feeTxt.Text = "1"; feeTxt.ForeColor = Color.Black; }
+            else
+            { fee = (Convert.ToInt32(feeTxt.Text) * 100); }
+
+            string sendTransaction =
+            "{" + Environment.NewLine +
+            "  \"destinations\": [" + Environment.NewLine +
+            "    {" + Environment.NewLine +
+            "      \"address\": \"" + walletAddressTxt.Text + "\"," + Environment.NewLine +
+            "      \"amount\": " + amount + "" + Environment.NewLine +
+            "    }" + Environment.NewLine +
+            "  ]," + Environment.NewLine +
+            "  \"mixin\": " + mixinLst.Text + "," + Environment.NewLine +
+            "  \"fee\": " + fee + "," + Environment.NewLine +
+            "  \"sourceAddresses\": [" + Environment.NewLine +
+            "    \"" + Config.PrimaryAddress + "\"" + Environment.NewLine +
+            "  ]," + Environment.NewLine +
+            "  \"paymentID\": \"" + paymentId + "\"," + Environment.NewLine +
+            "  \"changeAddress\": \""+ Config.PrimaryAddress + "\"," + Environment.NewLine +
+            "  \"unlockTime\": 0" + Environment.NewLine +
+            "}";
+
+            /*"{" + Environment.NewLine +
+              "  \"mixin\": 2," + Environment.NewLine +
+              "  \"fee\": 100," + Environment.NewLine +
+              "  \"paymentID\": \"\"," + Environment.NewLine +
+              "  \"changeAddress\": \"Sp4Fkd6M4NQjRfsLYJgjqRTvRwf88rg3y5hFXwH5G33oD7oty2nTBpSHyNDb5d349RY8TacF4gVpHHHBTTNFxJAB1iHcJSHd3\"," + Environment.NewLine +
+              "  \"unlockTime\": 0," + Environment.NewLine +
+              "  \"sourceAddresses\": [" + Environment.NewLine +
+              "    \"Sp4Fkd6M4NQjRfsLYJgjqRTvRwf88rg3y5hFXwH5G33oD7oty2nTBpSHyNDb5d349RY8TacF4gVpHHHBTTNFxJAB1iHcJSHd3\"" + Environment.NewLine +
+              "  ]," + Environment.NewLine +
+              "  \"destinations\": [" + Environment.NewLine +
+              "    \"address\": " + Environment.NewLine +
+              "    \"Sp362SfAKQ2MXaHw5NfGxYLomHjxsG179eaT8piTprU695LVn97aavKZzBRPBZvMKH2DQ3rZg5onJMwSfBMYLLv6114N6WTgA\"," + Environment.NewLine +
+              "    \"amount\": 500" + Environment.NewLine +
+              "  ]," + Environment.NewLine +
+              "}";*/
+
+            string response = ApiClient.HTTP(sendTransaction, "/transactions/send/advanced", "POST");
         }
     }
 }

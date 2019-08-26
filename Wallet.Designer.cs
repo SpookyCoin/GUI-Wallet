@@ -35,6 +35,9 @@
             this.overviewTab = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.primaryAddressValue = new System.Windows.Forms.Label();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lockedValue = new System.Windows.Forms.Label();
             this.lockedLbl = new System.Windows.Forms.Label();
@@ -71,13 +74,13 @@
             this.exportPrivateKeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.overviewTab.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.transactionsTab.SuspendLayout();
@@ -86,9 +89,6 @@
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -156,6 +156,37 @@
             this.primaryAddressValue.TabIndex = 7;
             this.primaryAddressValue.Text = "-";
             this.primaryAddressValue.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CopyAddress);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pictureBox3.Image = global::SpookyCoin_Gui_Wallet.Properties.Resources.spookycointext;
+            this.pictureBox3.Location = new System.Drawing.Point(119, 242);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(117, 13);
+            this.pictureBox3.TabIndex = 6;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pictureBox2.Image = global::SpookyCoin_Gui_Wallet.Properties.Resources.walletv100text;
+            this.pictureBox2.Location = new System.Drawing.Point(119, 257);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(135, 13);
+            this.pictureBox2.TabIndex = 5;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pictureBox1.Image = global::SpookyCoin_Gui_Wallet.Properties.Resources.spookycoin;
+            this.pictureBox1.InitialImage = null;
+            this.pictureBox1.Location = new System.Drawing.Point(13, 205);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
             // 
             // groupBox2
             // 
@@ -296,7 +327,7 @@
             this.sendTab.Location = new System.Drawing.Point(4, 22);
             this.sendTab.Name = "sendTab";
             this.sendTab.Padding = new System.Windows.Forms.Padding(3);
-            this.sendTab.Size = new System.Drawing.Size(693, 317);
+            this.sendTab.Size = new System.Drawing.Size(880, 317);
             this.sendTab.TabIndex = 2;
             this.sendTab.Text = "Send";
             // 
@@ -314,7 +345,7 @@
             this.groupBox5.Controls.Add(this.label5);
             this.groupBox5.Location = new System.Drawing.Point(6, 112);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(679, 62);
+            this.groupBox5.Size = new System.Drawing.Size(866, 62);
             this.groupBox5.TabIndex = 12;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Spending";
@@ -334,9 +365,7 @@
             this.mixinLst.FormattingEnabled = true;
             this.mixinLst.Items.AddRange(new object[] {
             "0",
-            "1",
-            "2",
-            "3"});
+            "1"});
             this.mixinLst.Location = new System.Drawing.Point(322, 32);
             this.mixinLst.Name = "mixinLst";
             this.mixinLst.Size = new System.Drawing.Size(50, 21);
@@ -406,7 +435,7 @@
             this.groupBox4.Controls.Add(this.paymentIdTxt);
             this.groupBox4.Location = new System.Drawing.Point(6, 6);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(679, 100);
+            this.groupBox4.Size = new System.Drawing.Size(866, 100);
             this.groupBox4.TabIndex = 8;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Destination";
@@ -426,7 +455,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.walletAddressTxt.Location = new System.Drawing.Point(9, 32);
             this.walletAddressTxt.Name = "walletAddressTxt";
-            this.walletAddressTxt.Size = new System.Drawing.Size(664, 20);
+            this.walletAddressTxt.Size = new System.Drawing.Size(851, 20);
             this.walletAddressTxt.TabIndex = 2;
             this.walletAddressTxt.Tag = "Kanker";
             this.walletAddressTxt.Enter += new System.EventHandler(this.placeholderWalletAddressEnter);
@@ -447,7 +476,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.paymentIdTxt.Location = new System.Drawing.Point(9, 71);
             this.paymentIdTxt.Name = "paymentIdTxt";
-            this.paymentIdTxt.Size = new System.Drawing.Size(664, 20);
+            this.paymentIdTxt.Size = new System.Drawing.Size(851, 20);
             this.paymentIdTxt.TabIndex = 4;
             this.paymentIdTxt.Enter += new System.EventHandler(this.paymentIdEnter);
             this.paymentIdTxt.Leave += new System.EventHandler(this.paymentIdLeave);
@@ -455,12 +484,13 @@
             // sendBtn
             // 
             this.sendBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.sendBtn.Location = new System.Drawing.Point(558, 209);
+            this.sendBtn.Location = new System.Drawing.Point(745, 209);
             this.sendBtn.Name = "sendBtn";
             this.sendBtn.Size = new System.Drawing.Size(97, 31);
             this.sendBtn.TabIndex = 0;
             this.sendBtn.Text = "Send";
             this.sendBtn.UseVisualStyleBackColor = true;
+            this.sendBtn.Click += new System.EventHandler(this.sendBtn_Click);
             // 
             // menuStrip1
             // 
@@ -486,7 +516,7 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.fileToolStripMenuItem.Text = "Exit";
             // 
             // settingsToolStripMenuItem
@@ -501,13 +531,13 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // exportPrivateKeysToolStripMenuItem
             // 
             this.exportPrivateKeysToolStripMenuItem.Name = "exportPrivateKeysToolStripMenuItem";
-            this.exportPrivateKeysToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportPrivateKeysToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.exportPrivateKeysToolStripMenuItem.Text = "Export private keys";
             // 
             // helpToolStripMenuItem
@@ -521,40 +551,9 @@
             // aboutMenu
             // 
             this.aboutMenu.Name = "aboutMenu";
-            this.aboutMenu.Size = new System.Drawing.Size(180, 22);
+            this.aboutMenu.Size = new System.Drawing.Size(107, 22);
             this.aboutMenu.Text = "About";
             this.aboutMenu.Click += new System.EventHandler(this.aboutMenu_Click);
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBox3.Image = global::SpookyCoin_Gui_Wallet.Properties.Resources.spookycointext;
-            this.pictureBox3.Location = new System.Drawing.Point(119, 242);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(117, 13);
-            this.pictureBox3.TabIndex = 6;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBox2.Image = global::SpookyCoin_Gui_Wallet.Properties.Resources.walletv100text;
-            this.pictureBox2.Location = new System.Drawing.Point(119, 257);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(135, 13);
-            this.pictureBox2.TabIndex = 5;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBox1.Image = global::SpookyCoin_Gui_Wallet.Properties.Resources.spookycoin;
-            this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(13, 205);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
             // 
             // Wallet
             // 
@@ -577,6 +576,9 @@
             this.overviewTab.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -590,9 +592,6 @@
             this.groupBox4.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
