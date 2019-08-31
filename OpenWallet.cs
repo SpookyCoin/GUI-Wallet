@@ -9,6 +9,8 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
@@ -25,7 +27,7 @@ namespace SpookyCoin_Gui_Wallet
             // Start API
             ProcessStartInfo startAPI = new ProcessStartInfo();
             startAPI.FileName = Path.GetFileName("wallet-api.exe");
-            startAPI.Arguments = "--rpc-password kevin11 --port 8070";
+            startAPI.Arguments = "--rpc-password " + Config.API_Password + " --port " + Config.HTTP_Port;
             startAPI.CreateNoWindow = true;
             startAPI.UseShellExecute = false;
             Process.Start(startAPI);
@@ -41,69 +43,112 @@ namespace SpookyCoin_Gui_Wallet
             nodeList.SelectedItem = "127.0.0.1:11421";
         }
 
+        public static bool PingHost(string hostUri, int portNumber)
+        {
+            try
+            {
+                using (var client = new TcpClient(hostUri, portNumber))
+                    return true;
+            }
+            catch (SocketException ex)
+            {
+                return false;
+            }
+        }
+
         private void openWalletBtn_Click(object sender, EventArgs e)
         {
-            WalletOpen walletOpen = new WalletOpen();
-            walletOpen.daemonHost = "spookypool.nl";
-            walletOpen.daemonPort = 11421;
-            walletOpen.filename = walletFile.Text;
-            walletOpen.password = walletPassword.Text;
+            /// Split ip and port on selected node
+            string[] node = nodeList.Text.Split(':');
 
-            string walletOpenJson = JsonConvert.SerializeObject(walletOpen);
-            string response = ApiClient.HTTP(walletOpenJson, "/wallet/open", "POST");
-            
-            if (response.StartsWith("{")) { // If reply is Json
-                JObject JsonParse = JObject.Parse(response);
-                int errorCode = (int)JsonParse["errorCode"];
-                string errorMessage = (string)JsonParse["errorMessage"];
-                MessageBox.Show(errorMessage);
-            } else if (response == "403") { // If wallet already opened
-                MessageBox.Show("There is already a wallet opened.");
-            } else if(response == "") { // If success
-                MessageBox.Show("Logged in");
-                this.Hide();
+            // If ping to daemon is successfull
+            if (PingHost(node[0], Convert.ToInt32(node[1])))
+            {
+                Config.Connected_Node = nodeList.Text;
 
-                Wallet wallet = new Wallet();
-                wallet.Show();
+                // Open wallet
+                WalletOpen walletOpen = new WalletOpen();
+                walletOpen.daemonHost = node[0];
+                walletOpen.daemonPort = Convert.ToInt32(node[1]);
+                walletOpen.filename = walletFile.Text;
+                walletOpen.password = walletPassword.Text;
+
+                string walletOpenJson = JsonConvert.SerializeObject(walletOpen);
+                string response = ApiClient.HTTP(walletOpenJson, "/wallet/open", "POST");
+
+                if (response.StartsWith("{"))
+                { // If reply is Json
+                    JObject JsonParse = JObject.Parse(response);
+                    int errorCode = (int)JsonParse["errorCode"];
+                    string errorMessage = (string)JsonParse["errorMessage"];
+                    MessageBox.Show(errorMessage);
+                }
+                else if (response == "403")
+                { // If wallet already opened
+                    ApiClient.HTTP("", "/wallet", "DELETE"); // Logout of wallet in API
+                    MessageBox.Show("There was still a wallet loaded. It has been unloaded now. Please try again to open a wallet.");
+                }
+                else if (response == "")
+                { // If success
+                    //MessageBox.Show("Logged in");
+                    this.Hide();
+
+                    Wallet wallet = new Wallet();
+                    wallet.Show();
+                }
+                else
+                { // Other
+                    MessageBox.Show(response);
+                }
             }
-            else { // Other
-                MessageBox.Show(response);
+            else
+            {
+                MessageBox.Show("Could not connect to node. Make sure your daemon is running or try a different node.");
             }
         }
 
         private void createWalletBtn_Click(object sender, EventArgs e)
         {
-            CreateWallet createWallet = new CreateWallet();
-            createWallet.daemonHost = "spookypool.nl";
-            createWallet.daemonPort = 11421;
-            createWallet.filename = walletFile.Text;
-            createWallet.password = walletPassword.Text;
+            /// Split ip and port on selected node
+            string[] node = nodeList.Text.Split(':');
+            
+            // If ping to daemon is successfull
+            if (PingHost(node[0], Convert.ToInt32(node[1])))
+            {
+                Config.Connected_Node = nodeList.Text;
 
-            string createWalletJson = JsonConvert.SerializeObject(createWallet);
-            string response = ApiClient.HTTP(createWalletJson, "/wallet/create", "POST");
+                CreateWallet createWallet = new CreateWallet();
+                createWallet.daemonHost = node[0];
+                createWallet.daemonPort = Convert.ToInt32(node[1]);
+                createWallet.filename = walletFile.Text;
+                createWallet.password = walletPassword.Text;
 
-            if (response.StartsWith("{"))
-            { // If reply is Json
-                JObject JsonParse = JObject.Parse(response);
-                int errorCode = (int)JsonParse["errorCode"];
-                string errorMessage = (string)JsonParse["errorMessage"];
-                MessageBox.Show(errorMessage);
-            }
-            else if (response == "403")
-            { // If wallet already opened
-                MessageBox.Show("There is already a wallet opened.");
-            }
-            else if (response == "")
-            { // If success
-                MessageBox.Show("Wallet created");
-                this.Hide();
+                string createWalletJson = JsonConvert.SerializeObject(createWallet);
+                string response = ApiClient.HTTP(createWalletJson, "/wallet/create", "POST");
 
-                Wallet wallet = new Wallet();
-                wallet.Show();
-            }
-            else
-            { // Other
-                MessageBox.Show(response);
+                if (response.StartsWith("{"))
+                { // If reply is Json
+                    JObject JsonParse = JObject.Parse(response);
+                    int errorCode = (int)JsonParse["errorCode"];
+                    string errorMessage = (string)JsonParse["errorMessage"];
+                    MessageBox.Show(errorMessage);
+                }
+                else if (response == "403")
+                { // If wallet already opened
+                    ApiClient.HTTP("", "/wallet", "DELETE"); // Logout of wallet in API
+                    MessageBox.Show("There was still a wallet loaded. It has been unloaded now. Please try again to create a wallet.");
+                }
+                else if (response == "")
+                { // If success
+                    this.Hide();
+
+                    Wallet wallet = new Wallet();
+                    wallet.Show();
+                }
+                else
+                { // Other
+                    MessageBox.Show(response);
+                }
             }
         }
 

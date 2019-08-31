@@ -83,6 +83,7 @@
             // 
             // nodeList
             // 
+            this.nodeList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.nodeList.FormattingEnabled = true;
             this.nodeList.Location = new System.Drawing.Point(27, 262);
             this.nodeList.Name = "nodeList";
@@ -111,6 +112,7 @@
             // 
             this.walletPassword.Location = new System.Drawing.Point(27, 207);
             this.walletPassword.Name = "walletPassword";
+            this.walletPassword.PasswordChar = '*';
             this.walletPassword.Size = new System.Drawing.Size(198, 20);
             this.walletPassword.TabIndex = 1;
             // 
@@ -126,12 +128,14 @@
             // 
             // button1
             // 
+            this.button1.Enabled = false;
             this.button1.Location = new System.Drawing.Point(88, 339);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 9;
             this.button1.Text = "skip";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // browseFile

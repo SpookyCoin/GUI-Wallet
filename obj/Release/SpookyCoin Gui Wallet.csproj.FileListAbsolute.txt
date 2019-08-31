@@ -1,0 +1,5 @@
+C:\Users\Kevin\Documents\GitHub\GUI-Wallet\obj\Release\SpookyCoin_Gui_Wallet.About.resources
+C:\Users\Kevin\Documents\GitHub\GUI-Wallet\obj\Release\SpookyCoin_Gui_Wallet.OpenWallet.resources
+C:\Users\Kevin\Documents\GitHub\GUI-Wallet\obj\Release\SpookyCoin_Gui_Wallet.Properties.Resources.resources
+C:\Users\Kevin\Documents\GitHub\GUI-Wallet\obj\Release\SpookyCoin_Gui_Wallet.Wallet.resources
+C:\Users\Kevin\Documents\GitHub\GUI-Wallet\obj\Release\SpookyCoin Gui Wallet.csproj.GenerateResource.Cache

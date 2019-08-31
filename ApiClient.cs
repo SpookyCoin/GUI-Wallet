@@ -16,7 +16,7 @@ namespace SpookyCoin_Gui_Wallet
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(url) as HttpWebRequest;
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = method_send;
-            httpWebRequest.Headers["X-API-KEY"] = "kevin11";
+            httpWebRequest.Headers["X-API-KEY"] = Config.API_Password;
 
             // Send Json request
             if (method_send == "POST")

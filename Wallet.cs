@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Threading.Tasks;
@@ -45,8 +46,9 @@ namespace SpookyCoin_Gui_Wallet
             transactionsGrid.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             transactionsGrid.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-            // Get height, balance, transactions
+            // Get height, balance, transactions, connected node
             GetInformation();
+            connectedNode.Text = "Node: " + Config.Connected_Node;
 
             // Set Mixin to 1
             mixinLst.SelectedIndex = 0;
@@ -191,15 +193,41 @@ namespace SpookyCoin_Gui_Wallet
             Clipboard.SetText(Config.PrimaryAddress);
         }
 
+        public void Exit()
+        {
+            DialogResult dialogResult = MessageBox.Show("Are u sure you want to exit the SpookyCoin wallet?", "Are u sure?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                ApiClient.HTTP("", "/save", "PUT"); // Logout of wallet in API
+                ApiClient.HTTP("", "/wallet", "DELETE"); // Logout of wallet in API
+                foreach (var process in Process.GetProcessesByName("wallet-api"))
+                {
+                    process.Kill();
+                }
+                Environment.Exit(1);
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+            }
+        }
+
         private void Closed(object sender, FormClosingEventArgs e)
         {
-            ApiClient.HTTP("", "/save", "PUT"); // Logout of wallet in API
-            //ApiClient.HTTP("", "/wallet", "DELETE"); // Logout of wallet in API
-            /*foreach (var process in Process.GetProcessesByName("wallet-api"))
+            DialogResult dialogResult = MessageBox.Show("Are u sure you want to exit the SpookyCoin wallet?", "Are u sure?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
             {
-                process.Kill();
-            }*/
-            Environment.Exit(1);
+                ApiClient.HTTP("", "/save", "PUT"); // Logout of wallet in API
+                ApiClient.HTTP("", "/wallet", "DELETE"); // Logout of wallet in API
+                foreach (var process in Process.GetProcessesByName("wallet-api"))
+                {
+                    process.Kill();
+                }
+                Environment.Exit(1);
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
         }
 
         private void changeToBlack_Tick(object sender, EventArgs e)
@@ -286,6 +314,20 @@ namespace SpookyCoin_Gui_Wallet
             }
         }
 
+        public static string DoFormat(double myNumber)
+        {
+            var s = string.Format("{0:0.00}", myNumber);
+
+            if (s.EndsWith("00"))
+            {
+                return ((int)myNumber).ToString();
+            }
+            else
+            {
+                return s;
+            }
+        }
+
         private void sendBtn_Click(object sender, EventArgs e)
         {
             string paymentId;
@@ -297,10 +339,27 @@ namespace SpookyCoin_Gui_Wallet
             else
             { paymentId = paymentIdTxt.Text; }
 
+            if(walletAddressTxt.Text == walletAddressStr)
+            {
+                MessageBox.Show("Address is empty");
+            }
+
             if (amountTxt.Text == amountStr)
-            { amount = 0; }
+            {
+                MessageBox.Show("Amount is not valid");
+                amount = 0;
+            }
             else
-            { amount = (Convert.ToInt32(amountTxt.Text) * 100); }
+            {
+                if (amountTxt.Text.Contains("."))
+                {
+                    amount = Convert.ToInt32(DoFormat(Convert.ToDouble(amountTxt.Text)).Replace(".", ""));
+                }
+                else
+                {
+                    amount = (Convert.ToInt32(amountTxt.Text) * 100);
+                }
+            }
 
             if (feeTxt.Text == feeStr)
             { fee = 100; feeTxt.Text = "1"; feeTxt.ForeColor = Color.Black; }
@@ -312,7 +371,7 @@ namespace SpookyCoin_Gui_Wallet
             "  \"destinations\": [" + Environment.NewLine +
             "    {" + Environment.NewLine +
             "      \"address\": \"" + walletAddressTxt.Text + "\"," + Environment.NewLine +
-            "      \"amount\": " + amount + "" + Environment.NewLine +
+            "      \"amount\": " + amount + Environment.NewLine +
             "    }" + Environment.NewLine +
             "  ]," + Environment.NewLine +
             "  \"mixin\": " + mixinLst.Text + "," + Environment.NewLine +
@@ -325,23 +384,22 @@ namespace SpookyCoin_Gui_Wallet
             "  \"unlockTime\": 0" + Environment.NewLine +
             "}";
 
-            /*"{" + Environment.NewLine +
-              "  \"mixin\": 2," + Environment.NewLine +
-              "  \"fee\": 100," + Environment.NewLine +
-              "  \"paymentID\": \"\"," + Environment.NewLine +
-              "  \"changeAddress\": \"Sp4Fkd6M4NQjRfsLYJgjqRTvRwf88rg3y5hFXwH5G33oD7oty2nTBpSHyNDb5d349RY8TacF4gVpHHHBTTNFxJAB1iHcJSHd3\"," + Environment.NewLine +
-              "  \"unlockTime\": 0," + Environment.NewLine +
-              "  \"sourceAddresses\": [" + Environment.NewLine +
-              "    \"Sp4Fkd6M4NQjRfsLYJgjqRTvRwf88rg3y5hFXwH5G33oD7oty2nTBpSHyNDb5d349RY8TacF4gVpHHHBTTNFxJAB1iHcJSHd3\"" + Environment.NewLine +
-              "  ]," + Environment.NewLine +
-              "  \"destinations\": [" + Environment.NewLine +
-              "    \"address\": " + Environment.NewLine +
-              "    \"Sp362SfAKQ2MXaHw5NfGxYLomHjxsG179eaT8piTprU695LVn97aavKZzBRPBZvMKH2DQ3rZg5onJMwSfBMYLLv6114N6WTgA\"," + Environment.NewLine +
-              "    \"amount\": 500" + Environment.NewLine +
-              "  ]," + Environment.NewLine +
-              "}";*/
+              MessageBox.Show(ApiClient.HTTP(sendTransaction, "/transactions/send/advanced", "POST"));
+        }
 
-            string response = ApiClient.HTTP(sendTransaction, "/transactions/send/advanced", "POST");
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Still in development.");
+        }
+
+        private void exportPrivateKeysToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Still in development.");
+        }
+
+        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Exit();
         }
     }
 }

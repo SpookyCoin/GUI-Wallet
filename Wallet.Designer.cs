@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Wallet));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.connectedNode = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.overviewTab = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -94,18 +94,18 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
+            this.connectedNode});
             this.statusStrip1.Location = new System.Drawing.Point(0, 365);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(889, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // connectedNode
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(163, 17);
-            this.toolStripStatusLabel1.Text = "Connected to: 127.0.0.1:11421";
+            this.connectedNode.Name = "connectedNode";
+            this.connectedNode.Size = new System.Drawing.Size(120, 17);
+            this.connectedNode.Text = "Node: 127.0.0.1:11421";
             // 
             // tabControl1
             // 
@@ -518,6 +518,7 @@
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.fileToolStripMenuItem.Text = "Exit";
+            this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -533,12 +534,14 @@
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.optionsToolStripMenuItem.Text = "Options";
+            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // exportPrivateKeysToolStripMenuItem
             // 
             this.exportPrivateKeysToolStripMenuItem.Name = "exportPrivateKeysToolStripMenuItem";
             this.exportPrivateKeysToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.exportPrivateKeysToolStripMenuItem.Text = "Export private keys";
+            this.exportPrivateKeysToolStripMenuItem.Click += new System.EventHandler(this.exportPrivateKeysToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -613,7 +616,7 @@
         private System.Windows.Forms.Label lockedLbl;
         private System.Windows.Forms.Label unlockedValue;
         private System.Windows.Forms.Label unlockedLbl;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel connectedNode;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.DataGridView transactionsGrid;
         private System.Windows.Forms.PictureBox pictureBox2;
