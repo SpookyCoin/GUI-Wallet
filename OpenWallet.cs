@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -32,15 +33,22 @@ namespace SpookyCoin_Gui_Wallet
             startAPI.UseShellExecute = false;
             Process.Start(startAPI);
             
-
             // Init Nodes
             foreach (string Nodes in Config.Nodes)
             {
-                nodeList.Items.Add(Nodes);
+                string[] node = Nodes.Split(':');
+                
+                if (Functions.PingHost(node[0], Convert.ToInt32(node[1])) == true)
+                {
+                    nodeList.Items.Add("[✔] " + Nodes);
+                } else if (Functions.PingHost(node[0], Convert.ToInt32(node[1])) == false)
+                {
+                    nodeList.Items.Add("[X] " + Nodes);
+                }
             }
 
             // Select default node
-            nodeList.SelectedItem = "127.0.0.1:11421";
+            nodeList.SelectedIndex = 0;
         }
 
         public static bool PingHost(string hostUri, int portNumber)
@@ -50,7 +58,7 @@ namespace SpookyCoin_Gui_Wallet
                 using (var client = new TcpClient(hostUri, portNumber))
                     return true;
             }
-            catch (SocketException ex)
+            catch (SocketException)
             {
                 return false;
             }
@@ -60,15 +68,16 @@ namespace SpookyCoin_Gui_Wallet
         {
             /// Split ip and port on selected node
             string[] node = nodeList.Text.Split(':');
+            string[] node2 = node[0].Split(' ');
 
             // If ping to daemon is successfull
-            if (PingHost(node[0], Convert.ToInt32(node[1])))
+            if (Functions.PingHost(node2[1], Convert.ToInt32(node[1])))
             {
-                Config.Connected_Node = nodeList.Text;
+                Config.Connected_Node = node2[1] + ":" + node[1];
 
                 // Open wallet
                 WalletOpen walletOpen = new WalletOpen();
-                walletOpen.daemonHost = node[0];
+                walletOpen.daemonHost = node2[1];
                 walletOpen.daemonPort = Convert.ToInt32(node[1]);
                 walletOpen.filename = walletFile.Text;
                 walletOpen.password = walletPassword.Text;
@@ -111,14 +120,15 @@ namespace SpookyCoin_Gui_Wallet
         {
             /// Split ip and port on selected node
             string[] node = nodeList.Text.Split(':');
-            
+            string[] node2 = node[0].Split(' ');
+
             // If ping to daemon is successfull
-            if (PingHost(node[0], Convert.ToInt32(node[1])))
+            if (PingHost(node2[1], Convert.ToInt32(node[1])))
             {
-                Config.Connected_Node = nodeList.Text;
+                Config.Connected_Node = node2[1] + ":" + node[1];
 
                 CreateWallet createWallet = new CreateWallet();
-                createWallet.daemonHost = node[0];
+                createWallet.daemonHost = node2[1];
                 createWallet.daemonPort = Convert.ToInt32(node[1]);
                 createWallet.filename = walletFile.Text;
                 createWallet.password = walletPassword.Text;
@@ -149,6 +159,10 @@ namespace SpookyCoin_Gui_Wallet
                 { // Other
                     MessageBox.Show(response);
                 }
+            }
+            else
+            {
+                MessageBox.Show("Could not connect to node. Make sure your daemon is running or try a different node.");
             }
         }
 

@@ -20,6 +20,7 @@ namespace SpookyCoin_Gui_Wallet
                                         "gabberpool.xyz:11421" //Gabcraftia
                                        };
         public static string Connected_Node = "";
+        public static int ConnectionTimeout = 500;
 
         // Personal info
         public static string PrimaryAddress = null;

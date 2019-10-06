@@ -78,6 +78,7 @@
     <Compile Include="API\Error.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="API\CreateWallet.cs" />
+    <Compile Include="Functions.cs" />
     <Compile Include="OpenWallet.cs">
       <SubType>Form</SubType>
     </Compile>

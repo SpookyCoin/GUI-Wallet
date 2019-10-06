@@ -47,3 +47,4 @@ C:\Users\Kevin\Documents\GitHub\GUI-Wallet\obj\Debug\SpookyCoin_Gui_Wallet.Walle
 C:\Users\Kevin\Documents\GitHub\GUI-Wallet\obj\Debug\SpookyCoin Gui Wallet.csproj.GenerateResource.Cache
 C:\Users\Kevin\Documents\GitHub\GUI-Wallet\obj\Debug\SpookyCoin Gui Wallet.exe
 C:\Users\Kevin\Documents\GitHub\GUI-Wallet\obj\Debug\SpookyCoin Gui Wallet.pdb
+C:\Users\Kevin\Documents\GitHub\GUI-Wallet\bin\Debug\Newtonsoft.Json.dll
