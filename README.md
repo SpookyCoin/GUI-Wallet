@@ -1,2 +1,2 @@
 # GUI-Wallet
-[test](changelog.md)
+[Changelog](CHANGELOG.md)
